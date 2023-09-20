@@ -2,8 +2,9 @@
 name: Clean Image Registry - TEST 
 on:
   # Workflow triggers when a tag of given pattern is pushed
-  push:
-    tags: ['v[0-9]+.[0-9]+.[0-9]+']
+
+  workflow_dispatch: 
+  # workflow_call:
     inputs:
       image_name:
         description: Image Name
