@@ -71,11 +71,3 @@ jobs:
               echo "Provided value of prod_keep_at_least cannot be less than 5"
               exit 1
           fi
-      - name: List packages with tags before deletion for prod
-        uses: Calance-US/calance-list-packages-with-tags-action@v1.0.0
-        id: list-packages-with-tags-before-deletion
-        with:
-          image_name: ${{ inputs.image_name }}
-          GET_PACKAGES_TOKEN: ${{ secrets.IMAGE_CLEANUP_TOKEN }}
-          package_type: container
-          organization: Calance-US
