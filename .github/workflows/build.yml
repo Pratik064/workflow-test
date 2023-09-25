@@ -86,3 +86,11 @@ jobs:
           image-names: ${{ inputs.image_name }}
           keep-at-least: ${{ inputs.prod_keep_at_least }}
           token: ${{ secrets.IMAGE_CLEANUP_TOKEN }}
+      - name: List packages with tags after deletion for prod
+        uses: Calance-US/calance-list-packages-with-tags-action@v1.0.0
+        id: list-packages-with-tags-after-deletion
+        with:
+          image_name: ${{ inputs.image_name }}
+          GET_PACKAGES_TOKEN: ${{ secrets.IMAGE_CLEANUP_TOKEN }}
+          package_type: container
+          organization: Calance-US
