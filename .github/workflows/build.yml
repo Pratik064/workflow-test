@@ -57,7 +57,7 @@ on:
           Follow this link for creating Webhook URI:- https://tinyurl.com/yjertc35
         required: true
 jobs:
-  clean-ghcr-prod:
+  clean-ghcr-test:
     name: Delete old unused container images
     runs-on: ubuntu-latest
     steps:
@@ -75,3 +75,14 @@ jobs:
           GET_PACKAGES_TOKEN: ${{ secrets.IMAGE_CLEANUP_TOKEN }}
           package_type: container
           organization: Calance-US
+      - name: Delete old containers in Production
+        id: delete-packages-prod
+        uses: snok/container-retention-policy@v2
+        with:
+          cut-off: ${{ inputs.prod_cut_off }}
+          account-type: org
+          org-name: Calance-US
+          filter-tags: v*.*.*
+          image-names: ${{ inputs.image_name }}
+          keep-at-least: ${{ inputs.prod_keep_at_least }}
+          token: ${{ secrets.IMAGE_CLEANUP_TOKEN }}
